@@ -14,6 +14,8 @@ namespace Lashlift_Shop
             LashlifterController ctrl = new LashlifterController();
 
             ctrl.ReadLashliftersWithGirls();
+
+            Console.WriteLine("Hi.");
         }
     }
 }
