@@ -11,11 +11,7 @@ namespace Lashlift_Shop
     {
         static void Main(string[] args)
         {
-            LashlifterController ctrl = new LashlifterController();
-
-            ctrl.ReadLashliftersWithGirls();
-
-            Console.WriteLine("Hi.");
+            
         }
     }
 }
