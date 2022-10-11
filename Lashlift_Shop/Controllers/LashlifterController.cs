@@ -24,5 +24,10 @@ namespace Lashlift_Shop.Controllers
             unitOfwork.Lashlifters.Add(lashlifter);
             unitOfwork.Complete();
         }
+
+        public void UpdateLashlifter()
+        {
+            Console.WriteLine("test");
+        }
     }
 }
