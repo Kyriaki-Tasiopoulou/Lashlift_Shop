@@ -8,5 +8,13 @@ namespace Lashlift_Shop.Controllers
 {
     public class GirlController
     {
+        ViewTables viewTables = new ViewTables();
+        UnitOfWork unitOfwork = new UnitOfWork(new LashliftShopContext());
+
+        public void ReadAllGirls()
+        {
+            var girls = unitOfwork.Girls.GetAll();
+            viewTables.PrintGirls(girls);
+        }
     }
 }
