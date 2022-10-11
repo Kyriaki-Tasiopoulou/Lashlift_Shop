@@ -27,7 +27,7 @@ namespace Lashlift_Shop.Controllers
 
         public void UpdateLashlifter()
         {
-
+            Console.WriteLine("test");
         }
     }
 }
