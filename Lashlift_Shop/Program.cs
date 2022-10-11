@@ -1,4 +1,5 @@
-﻿using Lashlift_Shop.Controllers;
+﻿using Autofac;
+using Lashlift_Shop.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,13 @@ namespace Lashlift_Shop
     {
         static void Main(string[] args)
         {
-            Application app = new Application();
-            app.Run();
+            var container = ContainerConfig.Configure();
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var app = scope.Resolve<IApplication>();
+                app.Run();
+            }
+            Console.ReadLine();
         }
     }
 }

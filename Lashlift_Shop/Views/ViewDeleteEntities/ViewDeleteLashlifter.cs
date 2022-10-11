@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lashlift_Shop
 {
-    public class ViewDeleteLashlifter
+    public class ViewDeleteLashlifter : IViewDeleteLashlifter
     {
         public int ChooseLashlifterToDelete(IEnumerable<Lashlifter> lashlifters)
         {

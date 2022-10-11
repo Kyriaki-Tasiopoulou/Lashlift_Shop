@@ -7,44 +7,57 @@ using System.Threading.Tasks;
 
 namespace Lashlift_Shop.Controllers
 {
-    public class GirlController
+    public class GirlController : IGirlController
     {
-        ViewTables viewTables = new ViewTables();
-        UnitOfWork unitOfwork = new UnitOfWork(new LashliftShopContext());
-        ViewCreateGirl viewCreateGirl = new ViewCreateGirl();
-        ViewDeleteGirl viewDeleteGirl = new ViewDeleteGirl();
-        ViewUpdateGirl viewUpdateGirl = new ViewUpdateGirl();
+        private readonly IViewTables _viewTables;
+        private readonly IViewCreateGirl _viewCreateGirl;
+        private readonly IViewDeleteGirl _viewDeleteGirl;
+        private readonly IViewUpdateGirl _viewUpdateGirl;
+        private readonly IUnitOfWork _unitOfWork;
+        public GirlController(
+            IViewTables viewTables, 
+            IViewCreateGirl viewCreateGirl, 
+            IViewDeleteGirl viewDeleteGirl, 
+            IViewUpdateGirl viewUpdateGirl, 
+            IUnitOfWork unitOfWork)
+        {
+            _viewTables = viewTables;
+            _viewCreateGirl = viewCreateGirl;
+            _viewDeleteGirl = viewDeleteGirl;
+            _viewUpdateGirl = viewUpdateGirl;
+            _unitOfWork = unitOfWork;           
+        }      
 
         public void ReadAllGirls()
         {
-            var girls = unitOfwork.Girls.GetAll();
-            viewTables.PrintGirls(girls);
+            var girls = _unitOfWork.Girls.GetAll();
+            _viewTables.PrintGirls(girls);
         }
 
         public void CreateGirl()
         {
-            var girl = viewCreateGirl.CreateNewGirl();
-            unitOfwork.Girls.Add(girl);
-            unitOfwork.Complete();
+            var girl = _viewCreateGirl.CreateNewGirl();
+            _unitOfWork.Girls.Add(girl);
+            _unitOfWork.Complete();
         }
         public void DeleteGirl()
         {
-            var girls = unitOfwork.Girls.GetAll();
-            int girlId = viewDeleteGirl.ChooseGirlToDelete(girls);
-            Girl girlToDelete = unitOfwork.Girls.Get(girlId);
-            unitOfwork.Girls.Remove(girlToDelete);
-            unitOfwork.Complete();
+            var girls = _unitOfWork.Girls.GetAll();
+            int girlId = _viewDeleteGirl.ChooseGirlToDelete(girls);
+            Girl girlToDelete = _unitOfWork.Girls.Get(girlId);
+            _unitOfWork.Girls.Remove(girlToDelete);
+            _unitOfWork.Complete();
         }
         public void UpdateGirl()
         {
-            var girls = unitOfwork.Girls.GetAll();
-            int girlId = viewUpdateGirl.ChooseGirlToUpdate(girls);
-            Girl girlToUpdate = unitOfwork.Girls.Get(girlId);
-            Girl newGirl = viewCreateGirl.CreateNewGirl();
+            var girls = _unitOfWork.Girls.GetAll();
+            int girlId = _viewUpdateGirl.ChooseGirlToUpdate(girls);
+            Girl girlToUpdate = _unitOfWork.Girls.Get(girlId);
+            Girl newGirl = _viewCreateGirl.CreateNewGirl();
             girlToUpdate.Name = newGirl.Name;
             girlToUpdate.Age = newGirl.Age;
-            unitOfwork.Girls.ModifyEntity(girlToUpdate);
-            unitOfwork.Complete();
+            _unitOfWork.Girls.ModifyEntity(girlToUpdate);
+            _unitOfWork.Complete();
         }
     }
 }

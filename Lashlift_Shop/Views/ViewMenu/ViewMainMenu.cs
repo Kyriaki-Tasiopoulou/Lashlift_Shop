@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lashlift_Shop
 {
-    public class ViewMainMenu
+    public class ViewMainMenu : IViewMainMenu
     {
         public void PrintMainMenu()
         {

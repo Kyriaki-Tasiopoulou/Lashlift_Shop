@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lashlift_Shop
 {
-    public class ViewUpdateLashlifter
+    public class ViewUpdateLashlifter : IViewUpdateLashlifter
     {
         public int ChooseLashlifterToUpdate(IEnumerable<Lashlifter> lashlifters)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lashlift_Shop
 {
-    public class LashliftShopContext : DbContext
+    public class LashliftShopContext : DbContext, ILashliftShopContext
     {
         public LashliftShopContext() : base("name=LashliftShop")
         {
