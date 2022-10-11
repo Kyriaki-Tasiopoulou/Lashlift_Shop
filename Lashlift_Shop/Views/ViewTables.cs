@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lashlift_Shop
 {
-    public class ViewTables
+    public class ViewTables : IViewTables
     {
         public void PrintLashLifters(IEnumerable<Lashlifter> lashlifters)
         {

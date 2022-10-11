@@ -1,64 +1,75 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lashlift_Shop.Controllers
 {
-    public class LashlifterController
+    public class LashlifterController : ILashlifterController
     {
-        ViewTables viewTables = new ViewTables();
-        UnitOfWork unitOfwork = new UnitOfWork(new LashliftShopContext());
-        ViewCreateLashlifter viewCreateLashlifter = new ViewCreateLashlifter();
-        ViewDeleteLashlifter viewDeleteLashlifter = new ViewDeleteLashlifter();
-        ViewUpdateLashlifter viewUpdateLashlifter = new ViewUpdateLashlifter();
+        private readonly IViewTables _viewTables;
+        private readonly IViewCreateLashlifter _viewCreateLashlifter;
+        private readonly IViewDeleteLashlifter _viewDeleteLashlifter;
+        private readonly IViewUpdateLashlifter _viewUpdateLashlifter;
+        private readonly IUnitOfWork _unitOfWork;
+        public LashlifterController(IViewTables viewTables, IViewCreateLashlifter viewCreateLashlifter, IViewDeleteLashlifter viewDeleteLashlifter, IViewUpdateLashlifter viewUpdateLashlifter, IUnitOfWork unitOfWork)
+        {
+            _viewTables = viewTables;
+            _viewCreateLashlifter = viewCreateLashlifter;
+            _viewDeleteLashlifter = viewDeleteLashlifter;
+            _viewUpdateLashlifter = viewUpdateLashlifter;
+            _unitOfWork = unitOfWork;
+        }
+
         public void ReadLashliftersWithGirls()
         {
-            var lashlifters = unitOfwork.Lashlifters.GetLashliftersWithGirls();
-            viewTables.PrintLashLiftersWithGirls(lashlifters);
+            var lashlifters = _unitOfWork.Lashlifters.GetLashliftersWithGirls();
+            _viewTables.PrintLashLiftersWithGirls(lashlifters);
         }
         public void ReadAllLashlifters()
         {
-            var lashlifters = unitOfwork.Lashlifters.GetAll();
-            viewTables.PrintLashLifters(lashlifters);
+            var lashlifters = _unitOfWork.Lashlifters.GetAll();
+            _viewTables.PrintLashLifters(lashlifters);
         }
         public void ReadRichLashlifters()
         {
-            var lashlifters = unitOfwork.Lashlifters.GetRichLashlifters();
-            viewTables.PrintLashLifters(lashlifters);
+            var lashlifters = _unitOfWork.Lashlifters.GetRichLashlifters();
+            _viewTables.PrintLashLifters(lashlifters);
         }
         public void CreateLashlifter()
         {
-            var lashlifter = viewCreateLashlifter.CreateNewLashlifter();
-            unitOfwork.Lashlifters.Add(lashlifter);
-            unitOfwork.Complete();
+            var lashlifter = _viewCreateLashlifter.CreateNewLashlifter();
+            _unitOfWork.Lashlifters.Add(lashlifter);
+            _unitOfWork.Complete();
         }
 
         public void DeleteLashlifter()
         {
-            var lashlifters = unitOfwork.Lashlifters.GetAll();
-            int lashlifterId = viewDeleteLashlifter.ChooseLashlifterToDelete(lashlifters);
-            Lashlifter lashlifterToDelete = unitOfwork.Lashlifters.Get(lashlifterId);
-            var girls = unitOfwork.Girls.GetAll().Where(x => x.Lashlifter.LashlifterId == lashlifterId);
+            var lashlifters = _unitOfWork.Lashlifters.GetAll();
+            int lashlifterId = _viewDeleteLashlifter.ChooseLashlifterToDelete(lashlifters);
+            Lashlifter lashlifterToDelete = _unitOfWork.Lashlifters.Get(lashlifterId);
+            var girls = _unitOfWork.Girls.GetAll().Where(x => x.Lashlifter.LashlifterId == lashlifterId);
             foreach (var girl in girls)
             {
                 girl.Lashlifter = null;
             }
-            unitOfwork.Lashlifters.Remove(lashlifterToDelete);
-            unitOfwork.Complete();
+            _unitOfWork.Lashlifters.Remove(lashlifterToDelete);
+            _unitOfWork.Complete();
         }
 
         public void UpdateLashlifter()
         {
-            var lashlifters = unitOfwork.Lashlifters.GetAll();
-            int lashlifterId = viewUpdateLashlifter.ChooseLashlifterToUpdate(lashlifters);
-            Lashlifter lashlifter = unitOfwork.Lashlifters.Get(lashlifterId);
-            Lashlifter newLashlifter = viewCreateLashlifter.CreateNewLashlifter();
+            var lashlifters = _unitOfWork.Lashlifters.GetAll();
+            int lashlifterId = _viewUpdateLashlifter.ChooseLashlifterToUpdate(lashlifters);
+            Lashlifter lashlifter = _unitOfWork.Lashlifters.Get(lashlifterId);
+            Lashlifter newLashlifter = _viewCreateLashlifter.CreateNewLashlifter();
             lashlifter.Name = newLashlifter.Name;
             lashlifter.Salary = newLashlifter.Salary;
-            unitOfwork.Lashlifters.ModifyEntity(lashlifter);
-            unitOfwork.Complete();
+            _unitOfWork.Lashlifters.ModifyEntity(lashlifter);
+            _unitOfWork.Complete();
 
         }
 

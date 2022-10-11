@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lashlift_Shop
 {
-    public class ViewCreateGirl
+    public class ViewCreateGirl : IViewCreateGirl
     {
         public Girl CreateNewGirl()
         {
@@ -14,7 +14,7 @@ namespace Lashlift_Shop
             string inputName = Console.ReadLine();
             Console.WriteLine("Enter Girls Age");
             string inputAge = Console.ReadLine();
-            int.TryParse(inputAge,out int age);
+            int.TryParse(inputAge, out int age);
 
             Girl girl = new Girl()
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lashlift_Shop
 {
-    public class ViewCreateLashlifter
+    public class ViewCreateLashlifter : IViewCreateLashlifter
     {
         public Lashlifter CreateNewLashlifter()
         {

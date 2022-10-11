@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Lashlift_Shop
 {
-    internal interface IEntities
+    public interface IViewMainMenu
     {
+        void PrintMainMenu();
     }
 }
