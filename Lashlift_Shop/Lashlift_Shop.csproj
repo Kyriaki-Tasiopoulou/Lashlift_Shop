@@ -78,6 +78,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application.cs" />
+    <Compile Include="ContainerConfig.cs" />
     <Compile Include="Controllers\GirlController.cs" />
     <Compile Include="Controllers\LashlifterController.cs" />
     <Compile Include="Entities\Girl.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="IRepositories\ILashlifterRepository.cs" />
     <Compile Include="IRepositories\IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="IViewMainMenu.cs" />
     <Compile Include="LashliftShopContext.cs" />
     <Compile Include="LashliftShopDBInitializer.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -100,12 +103,7 @@
     <Compile Include="Views\ViewCreateEntities\ViewCreateLashlifter.cs" />
     <Compile Include="Views\ViewDeleteEntities\ViewDeleteGirl.cs" />
     <Compile Include="Views\ViewDeleteEntities\ViewDeleteLashlifter.cs" />
-    <Compile Include="Views\ViewMenu\ViewCreateMenu.cs" />
-    <Compile Include="Views\ViewMenu\ViewDeleteMenu.cs" />
     <Compile Include="Views\ViewMenu\ViewMainMenu.cs" />
-    <Compile Include="Views\ViewMenu\ViewReadMenu.cs" />
-    <Compile Include="Views\ViewMenu\ViewUpdateMenu.cs" />
-    <Compile Include="Views\ViewPairLashlifterGirl.cs" />
     <Compile Include="Views\ViewTables.cs" />
     <Compile Include="Views\ViewUpdateEntities\ViewUpdateGirl.cs" />
     <Compile Include="Views\ViewUpdateEntities\ViewUpdateLashlifter.cs" />

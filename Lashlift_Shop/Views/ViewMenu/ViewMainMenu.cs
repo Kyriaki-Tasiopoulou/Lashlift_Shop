@@ -8,12 +8,18 @@ namespace Lashlift_Shop
 {
     public class ViewMainMenu
     {
-        public static void PrintMainMenu()
+        public void PrintMainMenu()
         {
-            Console.WriteLine("Press 1 to Read Data");
-            Console.WriteLine("Press 2 to Create/Relate Data");
-            Console.WriteLine("Press 3 to Update Data");
-            Console.WriteLine("Press 4 to Delete Data");
+            Console.WriteLine("Press 1 to Read All Lashlifters");
+            Console.WriteLine("Press 2 to Read All Lashlifters with their Girls");
+            Console.WriteLine("Press 3 to Read rich Lashlifters");
+            Console.WriteLine("Press 4 to Read all Girls");
+            Console.WriteLine("Press 5 to Create a new Lashlifter");
+            Console.WriteLine("Press 6 to Create a new Girl");
+            Console.WriteLine("Press 7 to Update a Lashlifter");
+            Console.WriteLine("Press 8 to Update a Girl");
+            Console.WriteLine("Press 9 to Delete a Lashlifter");            
+            Console.WriteLine("Press 10 to Delete a Girl");            
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Press 'E' to Exit Program");
             Console.ResetColor();
